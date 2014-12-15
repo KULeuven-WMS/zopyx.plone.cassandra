@@ -12,7 +12,6 @@ zopyx.plone.cassandra
 """
 
 from Globals import InitializeClass
-from AccessControl import getSecurityManager
 from Products.Five import BrowserView
 
 
@@ -53,24 +52,25 @@ class CassandraView(BrowserView):
                 if d['acquired'] == ('Owner',) or len(d['acquired']) == 0:
                     del d['acquired']
 
-                if d.has_key('global') or d.has_key('local') or d.has_key('acquired'):
+                if 'global' in d or 'local' in d or 'acquired' in d:
                     _rolemap.append(d)
 
-            rel_path = '/'.join(folder.getPhysicalPath()).replace(context_path, '')
+            rel_path = '/'.join(folder.getPhysicalPath()).replace(
+                context_path, '')
             if rel_path.startswith('/'):
                 rel_path = rel_path[1:]
             if not rel_path:
                 rel_path = ''
 
             if _rolemap:
-                lst.append({ 'path' : brain.getURL(1),
-                             'relative_path': rel_path,
-                             'id ' : folder.getId(),
-                             'title' : folder.Title(),
-                             'rolemap' : _rolemap,
-                          })
+                lst.append({'path': brain.getURL(1),
+                            'relative_path': rel_path,
+                            'id': folder.getId(),
+                            'title': folder.Title(),
+                            'rolemap': _rolemap,
+                            })
 
-        lst.sort(lambda x,y: cmp(x['relative_path'], y['relative_path']))
+        lst.sort(lambda x, y: cmp(x['relative_path'], y['relative_path']))
         return lst
 
 InitializeClass(CassandraView)
