@@ -17,6 +17,30 @@
 
       <h1 i18n:translate="Permission report">Permission report</h1>
 
+        <form tal:attributes="href string:${context/absolute_url}/report_permissions" method="post">
+          <div>
+              <label class="local-roles" for="show_local" i18n:translate="local roles">Local</label>
+              <input type="checkbox" name="show_roles:list" value="local" id="show_local" tal:attributes="CHECKED show_local"/>
+              <label class="acquired-roles" for="show_acquired" i18n:translate="acquired roles">Acquired</label>
+              <input type="checkbox" name="show_roles:list" value="acquired" id="show_acquired" tal:attributes="CHECKED show_acquired"/>
+              <label class="global-roles" for="show_global" i18n:translate="global roles">Global</label>
+              <input type="checkbox" name="show_roles:list" value="global" id="show_global" tal:attributes="CHECKED show_global"/>
+          </div>
+          <div>
+              <label for="username" i18n:translate="username">Username</label>
+              <select name="username" size="1">
+                <option/>
+                <option tal:repeat="name usernames"
+                        tal:content="name"
+                        tal:attributes="value       python: name.replace('group_', '');
+                                        selected    python: name.replace('group_', '') == request.get('username')"
+                />
+              </select>
+          </div>
+          <div>
+              <input class="context" type="submit" i18n:attributes="value" value="Filter" />
+          </div>
+        </form>
         <table class="listing" tal:condition="rows">
           <thead>
             <tr>
@@ -87,31 +111,6 @@
              No permission settings found
         </div>
     
-        <form tal:condition="rows"
-              tal:attributes="href string:${context/absolute_url}/report_permissions" method="post">
-          <div>
-              <label class="local-roles" for="show_local" i18n:translate="local roles">Local</label>
-              <input type="checkbox" name="show_roles:list" value="local" id="show_local" tal:attributes="CHECKED show_local"/>
-              <label class="acquired-roles" for="show_acquired" i18n:translate="acquired roles">Acquired</label>
-              <input type="checkbox" name="show_roles:list" value="acquired" id="show_acquired" tal:attributes="CHECKED show_acquired"/>
-              <label class="global-roles" for="show_global" i18n:translate="global roles">Global</label>
-              <input type="checkbox" name="show_roles:list" value="global" id="show_global" tal:attributes="CHECKED show_global"/>
-          </div>
-          <div>
-              <label for="username" i18n:translate="username">Username</label>
-              <select name="username" size="1">
-                <option/>
-                <option tal:repeat="name usernames"
-                        tal:content="name"
-                        tal:attributes="value       python: name.replace('group_', '');
-                                        selected    python: name.replace('group_', '') == request.get('username')"
-                />
-              </select>
-          </div>
-          <div>
-              <input class="context" type="submit" i18n:attributes="value" value="Filter" />
-          </div>
-        </form>
 
     </div>
 

@@ -4,7 +4,7 @@
 #
 # ZOPYX Limited & Co. KG
 # Charlottenstr. 37/1, D-72070 Tübingen, Germany
-# info@zopyx.com, www.zopyx.com 
+# info@zopyx.com, www.zopyx.com
 ################################################################
 
 """
@@ -24,15 +24,19 @@ class CassandraView(BrowserView):
         return expr2
 
     def reportPermissions(self, filter=('local',)):
-        """ Walk over all subfolders of the current folder and 
+        """ Walk over all subfolders of the current folder and
             get hold of local roles etc.
         """
+
+        form = self.request.form
+        show_roles = form.get["show_roles"]
+        if not show_roles:
+            return []
 
         context_path = '/'.join(self.context.getPhysicalPath())
         brains = self.context.portal_catalog(path=context_path,
                                              is_folderish=True,
                                              )
-
         lst = []
         for brain in brains:
             folder = brain.getObject()
