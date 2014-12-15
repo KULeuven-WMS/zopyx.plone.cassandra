@@ -5,20 +5,20 @@ version = '0.3.6-dev'
 
 setup(name='zopyx.plone.cassandra',
       version=version,
-      description="Show all assigned local roles within a subtree for any Plone 4 site",
+      description="Show all assigned local roles within a subtree \
+         for any Plone 4 site",
       long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
-      # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
+      open(os.path.join("docs", "HISTORY.txt")).read(),
       classifiers=[
-        "Framework :: Plone",
-        "Framework :: Plone :: 4.0",
-        "Framework :: Plone :: 4.1",
-        "Framework :: Plone :: 4.2",
-        "Framework :: Plone :: 4.3",
-        "Programming Language :: Python",
-        "Topic :: Software Development :: Libraries :: Python Modules",
-        ],
-      keywords='web zope plone theme',
+          "Framework :: Plone",
+          "Framework :: Plone :: 4.0",
+          "Framework :: Plone :: 4.1",
+          "Framework :: Plone :: 4.2",
+          "Framework :: Plone :: 4.3",
+          "Programming Language :: Python",
+          "Topic :: Software Development :: Libraries :: Python Modules",
+          ],
+      keywords='web zope plone',
       author='Andreas Jung',
       author_email='info@zopyx.com',
       url='http://pypi.python.org/pypi/zopyx.plone.cassandra',
@@ -32,7 +32,7 @@ setup(name='zopyx.plone.cassandra',
           # -*- Extra requirements: -*-
       ],
       entry_points="""
-      # -*- entry_points -*- 
+      # -*- entry_points -*-
       [z3c.autoinclude.plugin]
       target = plone
       """,
